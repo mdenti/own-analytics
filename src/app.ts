@@ -6,7 +6,7 @@ import express, { Express } from 'express';
 import { default as indexRouter } from './routes/index';
 import { default as usersRouter } from './routes/users';
 
-const app: Express = express();
+const app = express();
 
 app.use(morgan('dev'));
 app.use(express.json());
