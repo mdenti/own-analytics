@@ -9,13 +9,16 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const express_1 = __importDefault(require("express"));
 const index_1 = __importDefault(require("./routes/index"));
 const users_1 = __importDefault(require("./routes/users"));
-const app = express_1.default();
-app.use(morgan_1.default('dev'));
-app.use(express_1.default.json());
-app.use(express_1.default.urlencoded({ extended: false }));
-app.use(cookie_parser_1.default());
-app.use(express_1.default.static(path_1.default.join(__dirname, 'public')));
-app.use('/', index_1.default);
-app.use('/users', users_1.default);
-exports.default = app;
+function configureApp(context) {
+    const app = express_1.default();
+    app.use(morgan_1.default('dev'));
+    app.use(express_1.default.json());
+    app.use(express_1.default.urlencoded({ extended: false }));
+    app.use(cookie_parser_1.default());
+    app.use(express_1.default.static(path_1.default.join(__dirname, 'public')));
+    app.use('/', index_1.default);
+    app.use('/users', users_1.default);
+    return app;
+}
+exports.default = configureApp;
 //# sourceMappingURL=app.js.map
