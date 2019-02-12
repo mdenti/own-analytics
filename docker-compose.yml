@@ -12,6 +12,7 @@ services:
     links: 
       - elasticsearch
     environment:
+      NODE_ENV: dev
       ELASTICSEARCH_HOST: elasticsearch
       ELASTICSEARCH_PORT: 9200
 

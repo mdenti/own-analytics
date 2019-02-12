@@ -15,6 +15,7 @@ const elasticsearch_1 = __importDefault(require("./elasticsearch"));
 function createContext(config) {
     return __awaiter(this, void 0, void 0, function* () {
         const context = {
+            env: config.env,
             elasticSearch: yield elasticsearch_1.default(config),
         };
         return context;

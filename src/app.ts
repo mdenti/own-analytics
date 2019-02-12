@@ -11,6 +11,10 @@ import { default as usersRouter } from './routes/users';
 export default function configureApp(context: Context) {
   const app = express();
 
+  if (context.env === 'prod') {
+    app.set('trust proxy', true);
+  }
+
   app.use(morgan('dev'));
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));

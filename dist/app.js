@@ -11,6 +11,9 @@ const index_1 = __importDefault(require("./routes/index"));
 const users_1 = __importDefault(require("./routes/users"));
 function configureApp(context) {
     const app = express_1.default();
+    if (context.env === 'prod') {
+        app.set('trust proxy', true);
+    }
     app.use(morgan_1.default('dev'));
     app.use(express_1.default.json());
     app.use(express_1.default.urlencoded({ extended: false }));

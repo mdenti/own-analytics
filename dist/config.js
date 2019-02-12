@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const config = {
+    env: process.env.NODE_ENV || 'prod',
     port: process.env.PORT || '3000',
     elasticSearch: {
         host: process.env.ELASTICSEARCH_HOST || 'localhost',

@@ -4,11 +4,13 @@ interface ElasticSearchConfig {
 }
 
 export interface Config {
+  env: string;
   port: string;
   elasticSearch: ElasticSearchConfig;
 }
 
 const config: Config = {
+  env: process.env.NODE_ENV || 'prod',
   port: process.env.PORT || '3000',
   elasticSearch: {
     host: process.env.ELASTICSEARCH_HOST || 'localhost',
