@@ -1,4 +1,4 @@
-// import minify from 'rollup-plugin-babel-minify';
+import minify from 'rollup-plugin-babel-minify';
 import commonjs from 'rollup-plugin-commonjs';
 import typescript from 'rollup-plugin-typescript2';
 
@@ -14,8 +14,8 @@ export default {
       tsconfig: "tsconfig.browser.json"
     }),
     commonjs(),
-    // minify({
-    //   comments: false,
-    // })
+    minify({
+      comments: false,
+    })
 	]
 }
