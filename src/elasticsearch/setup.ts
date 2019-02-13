@@ -1,6 +1,6 @@
 import { Client } from 'elasticsearch';
 
-const EVENTS_INDEX = 'eventlog';
+export const EVENTS_INDEX = 'eventlog';
 
 async function setupMapping(
   es: Client, index: string, propertyName: string, propertyBody: any,
@@ -33,5 +33,6 @@ export async function setupIndices(es: Client) {
   await setupMapping(es, EVENTS_INDEX, 'label', { type: 'keyword' });
   await setupMapping(es, EVENTS_INDEX, 'timestamp', { type: 'date' });
   await setupMapping(es, EVENTS_INDEX, 'ip', { type: 'ip' });
+  await setupMapping(es, EVENTS_INDEX, 'url', { type: 'keyword' });
   await setupMapping(es, EVENTS_INDEX, 'referrer', { type: 'keyword' });
 }
