@@ -1,31 +1,46 @@
+// import 'whatwg-fetch';
 import { EventCreateInput } from '../api/specs';
 
 interface EventInput {
-  type?: string;
-  category?: string;
+  type: string;
+  category: string;
   action?: string;
   label?: string;
 }
 
-function send(eventBase: EventInput, callback: () => void) {
-  const eventDefaults = {
+async function send(eventData: EventInput, callback?: () => void) {
+  const eventDefaults: EventCreateInput = {
     type: 'event',
     category: '',
     action: '',
     label: '',
-    url: '',
-    referrer: '',
+    url: window.location.href,
+    urlDomain: window.location.hostname,
+    urlPath: window.location.pathname,
+    referrer: document.referrer,
   };
-  const event: EventCreateInput = Object.assign({}, eventDefaults, eventBase);
+  const event: EventCreateInput = { ...eventDefaults, ...eventData };
+  const response = await fetch('', {
+    cache: 'no-cache',
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify(event),
+  });
+  if (response.status !== 200) {
+    throw new Error('Bad data sent with event');
+  }
+  if (callback) return callback();
+  return;
 }
 
-function an(command: string, data: any, callback: () => void) {
+async function analytics(command: string, data: any, callback?: () => void) {
   switch (command) {
     case 'send':
-      send(data, callback);
-      break;
+      return send(data, callback);
     default:
-      break;
+      return;
   }
 }
 
@@ -40,7 +55,7 @@ declare global {
 const existing = window.an;
 
 existing.q.forEach((args) => {
-  an.call(null, args);
+  analytics.call(null, args);
 });
 
-export default an;
+export default analytics;

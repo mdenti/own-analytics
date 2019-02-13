@@ -5,17 +5,18 @@
   "scripts": {
     "start": "node ./dist/bin/www",
     "start-dev": "nodemon --watch dist --legacy-watch ./dist/bin/www",
-    "build-ts": "tsc && tsc -p tsconfig.browser.json",
+    "build-ts": "tsc && rollup -c",
     "watch-ts": "concurrently --kill-others \"npm run watch-ts-node\" \"npm run watch-ts-browser\"",
     "watch-ts-node": "tsc -w",
-    "watch-ts-browser": "tsc-bundle ./src/public/lib.ts --watch --outFile ./dist/public/lib.js --exportAs an"
+    "watch-ts-browser": "rollup -cw"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
     "elasticsearch": "^15.4.1",
     "express": "~4.16.0",
     "morgan": "~1.9.0",
-    "runtypes": "^3.1.2"
+    "runtypes": "^3.1.2",
+    "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.1",
@@ -25,9 +26,13 @@
     "@types/node": "^10.12.23",
     "concurrently": "^4.1.0",
     "nodemon": "^1.18.10",
+    "rollup": "^1.1.2",
+    "rollup-plugin-babel-minify": "^7.0.0",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-typescript2": "^0.19.2",
+    "tslib": "^1.9.3",
     "tslint": "^5.12.1",
     "tslint-config-airbnb": "^5.11.1",
-    "typescript": "^3.3.3",
-    "typescript-bundle": "^1.0.10"
+    "typescript": "^3.3.3"
   }
 }
