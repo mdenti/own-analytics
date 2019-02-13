@@ -11,5 +11,7 @@ exports.eventCreateInput = runtypes_1.Record({
     label: runtypes_1.String,
     referrer: runtypes_1.String,
     url: runtypes_1.String,
+    urlDomain: runtypes_1.String,
+    urlPath: runtypes_1.String,
 });
 //# sourceMappingURL=index.js.map

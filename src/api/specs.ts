@@ -5,4 +5,6 @@ export interface EventCreateInput {
   label: string;
   referrer: string;
   url: string;
+  urlDomain: string;
+  urlPath: string;
 }

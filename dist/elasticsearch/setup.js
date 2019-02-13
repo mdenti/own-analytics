@@ -41,6 +41,8 @@ function setupIndices(es) {
         yield setupMapping(es, exports.EVENTS_INDEX, 'timestamp', { type: 'date' });
         yield setupMapping(es, exports.EVENTS_INDEX, 'ip', { type: 'ip' });
         yield setupMapping(es, exports.EVENTS_INDEX, 'url', { type: 'keyword' });
+        yield setupMapping(es, exports.EVENTS_INDEX, 'urlDomain', { type: 'keyword' });
+        yield setupMapping(es, exports.EVENTS_INDEX, 'urlPath', { type: 'keyword' });
         yield setupMapping(es, exports.EVENTS_INDEX, 'referrer', { type: 'keyword' });
     });
 }

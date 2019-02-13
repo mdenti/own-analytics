@@ -34,5 +34,7 @@ export async function setupIndices(es: Client) {
   await setupMapping(es, EVENTS_INDEX, 'timestamp', { type: 'date' });
   await setupMapping(es, EVENTS_INDEX, 'ip', { type: 'ip' });
   await setupMapping(es, EVENTS_INDEX, 'url', { type: 'keyword' });
+  await setupMapping(es, EVENTS_INDEX, 'urlDomain', { type: 'keyword' });
+  await setupMapping(es, EVENTS_INDEX, 'urlPath', { type: 'keyword' });
   await setupMapping(es, EVENTS_INDEX, 'referrer', { type: 'keyword' });
 }

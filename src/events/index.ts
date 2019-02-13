@@ -10,6 +10,8 @@ export interface Event {
   timestamp: Date;
   ip: string;
   url: string;
+  urlDomain: string;
+  urlPath: string;
   referrer: string;
 }
 

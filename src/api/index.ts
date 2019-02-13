@@ -11,4 +11,6 @@ export const eventCreateInput = Record({
   label: String,
   referrer: String,
   url: String,
+  urlDomain: String,
+  urlPath: String,
 });
