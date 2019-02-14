@@ -5,19 +5,30 @@ import { Context } from '../context';
 
 import { eventCreateInput, EventCreateInput } from '../api';
 
-export default function configureRouter(context: Context) {
+async function checkInputAndAddEvent(context: Context, data: any, ip: string) {
   const { elasticSearch } = context;
+
+  const input: EventCreateInput = eventCreateInput.check(data);
+  const event: Event = Object.assign({}, input, {
+    ip,
+    timestamp: new Date(),
+  });
+
+  await addEvent(elasticSearch, event);
+}
+
+// TODO: add error handling to the routes
+export default function configureRouter(context: Context) {
   const router = express.Router();
 
+  router.get('/', async (req, res) => {
+    // we may want to use shorter parameter names here
+    await checkInputAndAddEvent(context, req.query, req.ip);
+    res.send();
+  });
+
   router.post('/', async (req, res) => {
-    const input: EventCreateInput = eventCreateInput.check(req.body);
-    const event: Event = Object.assign({}, input, {
-      ip: req.ip,
-      timestamp: new Date(),
-    });
-
-    await addEvent(elasticSearch, event);
-
+    await checkInputAndAddEvent(context, req.body, req.ip);
     res.send();
   });
 

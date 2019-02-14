@@ -45,10 +45,10 @@ async function send(eventData: EventInput, callback?: () => void) {
       body: JSON.stringify(event),
     });
     if (response.status !== 200) {
-      throw new Error('Bad data sent with event');
+      throw new Error('Bad data sent with event.');
     }
   } catch (error) {
-    // TODO: better handling
+    // TODO: better error handling
     throw error;
   }
   if (callback) return callback();

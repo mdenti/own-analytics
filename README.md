@@ -14,6 +14,7 @@ I want a way to do website analytics that is simple and can be deployed internal
 1. in one terminal run `npm run watch-ts`, this will watch the typescript files and recompile them when they change
 2. in a second terminal run `docker-compose up`
 3. in the browser open `http://localhost` to access the example page and test the library
+4. in the browser open `http://localhost:9200/eventlog/_doc/_search` to see (in JSON format) the events received by the server
 
 ## TODO:
 1. [x] SETUP backend
@@ -22,4 +23,8 @@ I want a way to do website analytics that is simple and can be deployed internal
 4. [x] Make browser library configurable
 5. [x] Serve browser library from server
 6. [x] Test out whether library actually works.
-7. [ ] Decide how to progress from here..
+7. [x] Allow GET request for "tracking pixel" use case
+8. [ ] Kibana or Make own simpler data visualization?
+9. [ ] Add better error handling
+10. [ ] Add some tests?
+11. [ ] Decide how to progress from here..
