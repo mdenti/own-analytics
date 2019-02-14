@@ -16,9 +16,7 @@ export default function configureRouter(context: Context) {
       timestamp: new Date(),
     });
 
-    console.log('event received!', event);
-
-    // await addEvent(elasticSearch, event);
+    await addEvent(elasticSearch, event);
 
     res.send();
   });

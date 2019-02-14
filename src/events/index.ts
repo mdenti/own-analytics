@@ -16,7 +16,7 @@ export interface Event {
 }
 
 export async function addEvent(client: Client, eventData: Event) {
-  const { _shards: { successful } } = await client.create({
+  const { _shards: { successful } } = await client.index({
     index: EVENTS_INDEX,
     type: '_doc',
     body: eventData,

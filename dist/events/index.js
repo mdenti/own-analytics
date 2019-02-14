@@ -11,7 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const setup_1 = require("../elasticsearch/setup");
 function addEvent(client, eventData) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { _shards: { successful } } = yield client.create({
+        const { _shards: { successful } } = yield client.index({
             index: setup_1.EVENTS_INDEX,
             type: '_doc',
             body: eventData,
