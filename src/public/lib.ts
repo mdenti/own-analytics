@@ -1,6 +1,19 @@
 import 'whatwg-fetch';
 import { EventCreateInput } from '../api/specs';
 
+interface AnPreUsage {
+  domain: string;
+  q: any[];
+}
+
+declare global {
+  interface Window {
+    _an: AnPreUsage;
+  }
+}
+
+const { domain, q: queue } = window._an;
+
 interface EventInput {
   type: string;
   category: string;
@@ -19,8 +32,11 @@ async function send(eventData: EventInput, callback?: () => void) {
     urlPath: window.location.pathname,
     referrer: document.referrer,
   };
+
   const event: EventCreateInput = { ...eventDefaults, ...eventData };
-  const response = await fetch('', {
+  console.log('Send analytics event', event);
+
+  const response = await fetch(`${domain}/events`, {
     cache: 'no-cache',
     method: 'POST',
     headers: {
@@ -44,18 +60,8 @@ async function analytics(command: string, data: any, callback?: () => void) {
   }
 }
 
-interface PreAN {
-  q: any[];
-}
-
-declare global {
-  interface Window { an: PreAN; }
-}
-
-const existing = window.an;
-
-existing.q.forEach((args) => {
-  analytics.call(null, args);
+queue.forEach((args) => {
+  analytics.apply(null, args);
 });
 
 export default analytics;

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      (function(domain) {
+        window._an = {
+          domain: domain,
+          q: [],
+        };
+        window.an = function() { window._an.q.push(arguments); };
+        var s = document.createElement('script');
+        s.setAttribute('src', domain+'/bundle.js');
+        var h = document.getElementsByTagName('head')[0];
+        h.prepend(s);
+      })('http://localhost:3000');
+      an('send', { category: 'pageview' });
+    </script>
+  </head>
+  <body>
+    Hello, World!
+  </body>
+</html>
