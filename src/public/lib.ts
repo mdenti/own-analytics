@@ -36,16 +36,20 @@ async function send(eventData: EventInput, callback?: () => void) {
   const event: EventCreateInput = { ...eventDefaults, ...eventData };
   console.log('Send analytics event', event);
 
-  const response = await fetch(`${domain}/events`, {
-    cache: 'no-cache',
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json',
-    },
-    body: JSON.stringify(event),
-  });
-  if (response.status !== 200) {
-    throw new Error('Bad data sent with event');
+  try {
+    const response = await fetch(`${domain}/events`, {
+      cache: 'no-cache',
+      method: 'POST',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(event),
+    });
+    if (response.status !== 200) {
+      throw new Error('Bad data sent with event');
+    }
+  } catch (error) {
+    // TODO: better handling
+    throw error;
   }
   if (callback) return callback();
   return;

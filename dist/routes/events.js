@@ -12,7 +12,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const events_1 = require("../events");
 const api_1 = require("../api");
 function configureRouter(context) {
     const { elasticSearch } = context;
@@ -23,7 +22,8 @@ function configureRouter(context) {
             ip: req.ip,
             timestamp: new Date(),
         });
-        yield events_1.addEvent(elasticSearch, event);
+        console.log('event received!', event);
+        // await addEvent(elasticSearch, event);
         res.send();
     }));
     return router;
